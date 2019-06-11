@@ -33,7 +33,8 @@ function! s:bitbucket_url(opts, ...) abort
   if a:opts.commit =~# '^\d\=$'
     let commit = a:opts.repo.rev_parse('HEAD')
   else
-    let commit = a:opts.commit
+    " let commit = a:opts.commit
+    let commit = a:opts.repo.rev_parse(a:opts.commit)
   endif
   if get(a:opts, 'type', '') ==# 'tree' || a:opts.path =~# '/$'
     let url = s:sub(root . '/src/' . commit . '/' . path,'/$','')
